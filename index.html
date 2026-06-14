@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOVA DESIGN | OFFICIAL AGENCY</title>
-    <!-- مكتبات GSAP والـ ScrollTo -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
     
@@ -27,32 +26,32 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; cursor: none; }
         body { background-color: var(--bg-color); color: var(--text-color); transition: 0.5s; overflow-x: hidden; }
 
-        /* Loader & Elements */
-        #loader { position: fixed; inset: 0; background-color: var(--accent-color); display: flex; align-items: center; justify-content: center; z-index: 9999; color: var(--white); font-size: 4rem; font-weight: 900; }
-        #design-robot { position: fixed; font-size: 3rem; z-index: 999; pointer-events: none; }
-        .cursor { position: fixed; width: 20px; height: 20px; border: 2px solid var(--accent-color); border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.1s ease; }
+        #loader { position: fixed; inset: 0; background-color: var(--accent-color); display: flex; align-items: center; justify-content: center; z-index: 9999; color: var(--white); font-size: 3rem; font-weight: 900; }
+        #design-robot { position: fixed; font-size: 2rem; z-index: 999; pointer-events: none; }
+        .cursor { position: fixed; width: 20px; height: 20px; border: 2px solid var(--accent-color); border-radius: 50%; pointer-events: none; z-index: 9999; }
 
-        /* Navigation */
-        nav { padding: 2rem 10%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--glass); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid rgba(128,128,128,0.1); }
+        nav { padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--glass); backdrop-filter: blur(10px); z-index: 1000; }
         
-        /* Hero */
-        .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; }
-        .hero h1 { font-size: 7rem; line-height: 0.9; font-weight: 800; margin-bottom: 2rem; }
+        .hero { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; padding: 0 5%; }
+        .hero h1 { font-size: 5rem; line-height: 0.9; font-weight: 800; margin-bottom: 2rem; }
 
-        /* Services Grid */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; padding: 0 10%; }
-        .service-card { padding: 3rem; background: rgba(128, 128, 128, 0.05); border: 1px solid rgba(128, 128, 128, 0.1); border-radius: 20px; transition: 0.3s; cursor: pointer; text-align: left; color: var(--text-color); }
-        .service-card:hover { background-color: var(--accent-color); color: var(--white); transform: translateY(-10px); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding: 0 5%; }
+        .service-card { padding: 2rem; background: rgba(128, 128, 128, 0.05); border: 1px solid rgba(128, 128, 128, 0.1); border-radius: 20px; transition: 0.3s; cursor: pointer; text-align: left; }
+        .service-card:hover { background-color: var(--accent-color); color: var(--white); transform: translateY(-5px); }
 
-        /* Form Section */
-        #pricing-section { padding: 80px 10%; }
-        .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 900px; background: rgba(128,128,128,0.05); padding: 3rem; border-radius: 20px; }
-        input, textarea, select { padding: 1.5rem; border-radius: 10px; border: 1px solid #64748B; background: transparent; color: var(--text-color); width: 100%; }
-        .btn-submit { background: var(--accent-color); color: white; padding: 1.5rem 3rem; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; }
+        #pricing-section { padding: 40px 5%; }
+        .contact-form { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 900px; background: rgba(128,128,128,0.05); padding: 2rem; border-radius: 20px; }
+        input, textarea, select { padding: 1rem; border-radius: 10px; border: 1px solid #64748B; background: transparent; color: var(--text-color); width: 100%; }
+        .btn-submit { background: var(--accent-color); color: white; padding: 1rem 2rem; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; }
 
-        /* Marquee */
-        .marquee-inner { display: flex; gap: 2rem; width: max-content; animation: scroll 120s linear infinite; }
-        .comment-card { min-width: 350px; background: var(--white); color: var(--black); padding: 2rem; border-radius: 15px; }
+        /* موبايل ريسبونسيف */
+        @media (min-width: 768px) {
+            .contact-form { grid-template-columns: 1fr 1fr; }
+            .hero h1 { font-size: 7rem; }
+        }
+
+        .marquee-inner { display: flex; gap: 2rem; width: max-content; animation: scroll 60s linear infinite; }
+        .comment-card { min-width: 250px; background: var(--white); color: var(--black); padding: 1.5rem; border-radius: 15px; }
         @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     </style>
 </head>
@@ -63,17 +62,17 @@
     <div class="cursor"></div>
 
     <nav>
-        <div style="font-size: 2rem; font-weight: 900;">NOVA.</div>
-        <button class="btn-submit" onclick="document.body.classList.toggle('dark')" style="padding: 10px 20px;">Mode</button>
+        <div style="font-size: 1.5rem; font-weight: 900;">NOVA.</div>
+        <button class="btn-submit" onclick="document.body.classList.toggle('dark')" style="padding: 5px 15px;">Mode</button>
     </nav>
 
     <section class="hero">
         <h1 id="hero-title">WE DESIGN BRANDS.</h1>
-        <p style="font-size: 1.5rem;">Professional Agency based in Cairo, Egypt.</p>
+        <p style="font-size: 1.2rem;">Professional Agency based in Cairo, Egypt.</p>
     </section>
 
     <section id="services">
-        <h2>Our Services</h2>
+        <h2 style="padding: 0 5%; margin-bottom: 2rem;">Our Services</h2>
         <div class="services-grid">
             <button class="service-card" onclick="scrollToPricing('Identity Design')"><h3>Identity Design</h3><p>Logo & Brand Guidelines.</p></button>
             <button class="service-card" onclick="scrollToPricing('Web Design')"><h3>Web Design</h3><p>UI/UX for Web & Apps.</p></button>
@@ -85,8 +84,7 @@
     <section id="pricing-section">
         <h2 id="pricing-title">Start your project</h2>
         <form id="contactForm" class="contact-form">
-            <!-- اختيار الباقة -->
-            <div style="grid-column: span 2; margin-bottom: 20px;">
+            <div style="grid-column: 1 / -1;">
                 <label style="display:block; margin-bottom:10px; font-weight:bold;">Select your package:</label>
                 <select name="Package" id="package-select">
                     <option value="Basic">Basic Package</option>
@@ -94,91 +92,34 @@
                     <option value="Premium">Premium Package</option>
                 </select>
             </div>
-            
-            <!-- حقول مخفية للربط -->
             <input type="hidden" name="Service" id="hidden-service-field">
-            
             <div class="form-group"><input type="text" name="Name" placeholder="Full Name" required></div>
             <div class="form-group"><input type="email" name="Email" placeholder="Work Email" required></div>
-            <div class="form-group" style="grid-column: span 2;"><textarea name="Details" placeholder="Project Details" rows="6"></textarea></div>
+            <div class="form-group" style="grid-column: 1 / -1;"><textarea name="Details" placeholder="Project Details" rows="4"></textarea></div>
             <button type="submit" class="btn-submit">Send Message</button>
         </form>
     </section>
 
-    <section>
-        <h2>Client Voices</h2>
-        <div style="width: 100%; overflow: hidden; padding: 50px 0;">
-            <div class="marquee-inner" id="marquee-box"></div>
-        </div>
-    </section>
-
     <script>
-        // 1. Initial Animations
         window.addEventListener('load', () => gsap.to('#loader', { y: '-100%', duration: 1.5 }));
         document.addEventListener('mousemove', (e) => gsap.to('.cursor', { x: e.clientX - 10, y: e.clientY - 10, duration: 0.1 }));
-        gsap.to("#design-robot", { x: "random(-400, 400)", y: "random(-300, 300)", duration: 3, repeat: -1, yoyo: true, rotation: "random(-45, 45)" });
-
-        // 2. Google Script URL
+        
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwXpcCrjT4iTld2UYdmJksa4K5d47f9Gcc183PRimhbxOVgOI843mYOf2CIq0ccAkxcvA/exec";
 
-        // 3. Handle Form Submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = this.querySelector('button');
             btn.innerText = "Sending...";
-            
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: new FormData(this)
-            })
-            .then(() => {
-                alert('تم استلام طلبك بنجاح!');
-                this.reset();
-                btn.innerText = "Send Message";
-            })
-            .catch(() => {
-                alert('تم إرسال الطلب!');
-                this.reset();
-                btn.innerText = "Send Message";
-            });
+            fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: new FormData(this) })
+            .then(() => { alert('تم استلام طلبك بنجاح!'); this.reset(); btn.innerText = "Send Message"; })
+            .catch(() => { alert('تم إرسال الطلب!'); this.reset(); btn.innerText = "Send Message"; });
         });
 
-        // 4. Scroll to Form Logic
         function scrollToPricing(service) {
             document.getElementById('pricing-title').innerText = "Start: " + service;
             document.getElementById('hidden-service-field').value = service;
-            gsap.to(window, { duration: 1, scrollTo: { y: "#pricing-section", offsetY: 50 }, ease: "power4.inOut" });
+            gsap.to(window, { duration: 1, scrollTo: { y: "#pricing-section", offsetY: 20 }, ease: "power4.inOut" });
         }
-
-        // 5. Comments
-        const commentsData = [
-            {name: "Ahmed Ali", text: "Great work!"}, {name: "Sara Mahmoud", text: "Detail is insane."}, {name: "Omar Hassan", text: "Understood my vision."}, {name: "Layla Youssef", text: "Fast delivery."}, {name: "Kareem Tarek", text: "Highly recommend."},
-            {name: "Mariam Emad", text: "Clean professional."}, {name: "Youssef Ahmed", text: "Perfect vibe."}, {name: "Nouran Khaled", text: "Unmatched quality."}, {name: "Ziad Mohamed", text: "Smooth process."}, {name: "Hala Ibrahim", text: "Just what I needed."},
-            {name: "Mazen Adel", text: "شغل ممتاز جداً."}, {name: "Nada Samir", text: "تصميمات تحفة."}, {name: "Tarek Fathy", text: "مجهود رائع."}, {name: "Dina Mansour", text: "أفضل من المتوقع."}, {name: "Karim Salah", text: "ذوق عالي."},
-            {name: "Salma Hany", text: "التزام بالمواعيد."}, {name: "Ahmed Nagy", text: "تجربة ممتازة."}, {name: "Reem Magdy", text: "تصميمات خرافية."}, {name: "Mostafa Gamal", text: "فريق محترف."}, {name: "Fatma Zahra", text: "النتيجة مبهرة."},
-            {name: "Ibrahim Said", text: "3abqari design."}, {name: "Amira Hassan", text: "Shoghl 3ali awi."}, {name: "Mohamed Ali", text: "Ysharaf."}, {name: "Nour Ahmed", text: "Perfect timing."}, {name: "Basma Yasser", text: "Layout is great."},
-            {name: "Hassan Omar", text: "Amazing job."}, {name: "Lina Tarek", text: "Best agency."}, {name: "Ali Mahmoud", text: "Professional."}, {name: "Nadine Fouad", text: "Clean."}, {name: "Yasser Kamal", text: "Keep it up!"}
-        ];
-        const box = document.getElementById('marquee-box');
-        [...commentsData, ...commentsData].forEach(c => {
-            box.innerHTML += `<div class="comment-card"><strong>${c.name}</strong><p>${c.text}</p></div>`;
-        });
-
-        // 6. Title Scramble
-        const title = document.getElementById('hero-title');
-        const phrases = ["WE DESIGN BRANDS.", "WE BUILD IDENTITIES.", "WE CREATE IMPACT."];
-        let pIdx = 0;
-        setInterval(() => {
-            pIdx = (pIdx + 1) % phrases.length;
-            const target = phrases[pIdx];
-            let iter = 0;
-            const int = setInterval(() => {
-                title.innerText = target.split("").map((l, i) => i < iter ? target[i] : String.fromCharCode(65 + Math.random()*26)).join("");
-                if(iter >= target.length) clearInterval(int);
-                iter += 1/3;
-            }, 30);
-        }, 4000);
     </script>
 </body>
 </html>
