@@ -4,37 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOVA DESIGN | OFFICIAL AGENCY</title>
-    <!-- مكتبات GSAP والـ ScrollTo -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-    
     <style>
-        :root {
-            --bg-color: #F8FAFC;
-            --text-color: #0F172A;
-            --accent-color: #0066FF;
-            --white: #FFFFFF;
-            --black: #000000;
-            --glass: rgba(255, 255, 255, 0.8);
-        }
-
-        body.dark {
-            --bg-color: #0F172A;
-            --text-color: #F8FAFC;
-            --accent-color: #38bdf8;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; cursor: none; }
+        :root { --bg-color: #F8FAFC; --text-color: #0F172A; --accent-color: #0066FF; --white: #FFFFFF; }
+        body.dark { --bg-color: #0F172A; --text-color: #F8FAFC; --accent-color: #38bdf8; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-color); transition: 0.5s; overflow-x: hidden; }
-
-        /* Loader & Elements */
-        #loader { position: fixed; inset: 0; background-color: var(--accent-color); display: flex; align-items: center; justify-content: center; z-index: 9999; color: var(--white); font-size: 3rem; font-weight: 900; }
-        #design-robot { position: fixed; font-size: 2.5rem; z-index: 999; pointer-events: none; }
-        .cursor { position: fixed; width: 20px; height: 20px; border: 2px solid var(--accent-color); border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.1s ease; }
-
-        /* Navigation */
-        nav { padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--glass); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid rgba(128,128,128,0.1); }
-        .nav-links { display: flex; gap: 1rem; align-items: center; }
+        nav { padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; }
+        .hero { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 5%; }
+        h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .contact-form { max-width: 600px; margin: 50px auto; padding: 2rem; background: rgba(128,128,128,0.05); border-radius: 20px; }
+        input, select, textarea { width: 100%; padding: 1rem; margin-bottom: 1rem; border-radius: 10px; border: 1px solid #64748B; background: transparent; color: var(--text-color); }
+        .btn-submit { background: var(--accent-color); color: white; padding: 1rem 2rem; border: none; border-radius: 50px; cursor: pointer; width: 100%; }
+        @media (min-width: 768px) { h1 { font-size: 5rem; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div style="font-size: 1.5rem; font-weight: 900;">NOVA.</div>
+        <a href="https://www.facebook.com/share/1G1yNLefUV/" target="_blank" style="text-decoration:none; color:var(--text-color); font-weight:bold;">Facebook</a>
+    </nav>
+    <section class="hero"><h1>WE DESIGN BRANDS.</h1></section>
+    <section id="pricing-section">
+        <form id="contactForm" class="contact-form">
+            <select name="Package" id="package-select"><option value="Basic">Basic</option><option value="Standard">Standard</option><option value="Premium">Premium</option></select>
+            <input type="hidden" name="Service" id="hidden-service-field" value="General">
+            <input type="text" name="Name" placeholder="Full Name" required>
+            <input type="tel" name="WhatsApp" placeholder="WhatsApp Number" required>
+            <textarea name="Details" placeholder="Project Details" rows="4"></textarea>
+            <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+    </section>
+    <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwXpcCrjT4iTld2UYdmJksa4K5d47f9Gcc183PRimhbxOVgOI843mYOf2CIq0ccAkxcvA/exec";
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button');
+            btn.innerText = "Sending...";
+            fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: new FormData(this) })
+            .then(() => { alert('تم الإرسال!'); this.reset(); btn.innerText = "Send Message"; })
+            .catch(() => { alert('تم الإرسال!'); this.reset(); btn.innerText = "Send Message"; });
+        });
+    </script>
+</body>
+</html>        .nav-links { display: flex; gap: 1rem; align-items: center; }
         
         /* Hero */
         .hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; padding: 0 5%; text-align: center; }
