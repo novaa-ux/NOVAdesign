@@ -2,71 +2,108 @@
 <html lang="ar" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOVA DESIGN | OFFICIAL AGENCY</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
     <style>
-        :root { --bg-color: #F8FAFC; --text-color: #0F172A; --accent-color: #0066FF; --white: #FFFFFF; }
+        :root { --bg-color: #F8FAFC; --text-color: #0F172A; --accent-color: #0066FF; --white: #FFFFFF; --black: #000000; --glass: rgba(255, 255, 255, 0.8); }
         body.dark { --bg-color: #0F172A; --text-color: #F8FAFC; --accent-color: #38bdf8; }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-color); transition: 0.5s; overflow-x: hidden; }
 
-        /* Navigation */
-        nav { padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.1); }
-        .nav-links { display: flex; gap: 15px; align-items: center; }
-        .fb-link { text-decoration: none; color: var(--text-color); font-weight: bold; border: 1px solid var(--text-color); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; }
+        /* Loader & Elements */
+        #loader { position: fixed; inset: 0; background-color: var(--accent-color); display: flex; align-items: center; justify-content: center; z-index: 9999; color: var(--white); font-size: 3rem; font-weight: 900; }
+        #design-robot { position: fixed; font-size: 3rem; z-index: 999; pointer-events: none; }
+        .cursor { position: fixed; width: 20px; height: 20px; border: 2px solid var(--accent-color); border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.1s ease; }
 
-        /* Hero */
-        .hero { min-height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
-        h1 { font-size: 2.5rem; line-height: 1.1; margin-bottom: 1rem; }
+        nav { padding: 2rem 10%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--glass); backdrop-filter: blur(10px); z-index: 1000; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .fb-link { text-decoration: none; color: var(--text-color); font-weight: bold; border: 1px solid var(--text-color); padding: 8px 15px; border-radius: 20px; }
 
-        /* Form */
-        #pricing-section { padding: 40px 5%; }
-        .contact-form { max-width: 600px; margin: 0 auto; padding: 2rem; background: rgba(128,128,128,0.05); border-radius: 20px; }
-        input, select, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #64748B; background: transparent; color: var(--text-color); font-size: 1rem; }
-        .btn-submit { background: var(--accent-color); color: white; padding: 12px 25px; border: none; border-radius: 50px; cursor: pointer; width: 100%; font-weight: bold; }
+        .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; }
+        .hero h1 { font-size: 5rem; font-weight: 800; margin-bottom: 2rem; }
 
-        /* Desktop Adjustments */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; padding: 0 10%; }
+        .service-card { padding: 3rem; background: rgba(128, 128, 128, 0.05); border: 1px solid rgba(128, 128, 128, 0.1); border-radius: 20px; transition: 0.3s; cursor: pointer; text-align: left; color: var(--text-color); }
+        .service-card:hover { background-color: var(--accent-color); color: var(--white); transform: translateY(-10px); }
+
+        #pricing-section { padding: 80px 10%; }
+        .contact-form { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 900px; background: rgba(128,128,128,0.05); padding: 2rem; border-radius: 20px; }
+        input, textarea, select { padding: 1.5rem; border-radius: 10px; border: 1px solid #64748B; background: transparent; color: var(--text-color); width: 100%; }
+        .btn-submit { background: var(--accent-color); color: white; padding: 1.5rem 3rem; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; }
+
+        .marquee-inner { display: flex; gap: 2rem; width: max-content; animation: scroll 60s linear infinite; }
+        .comment-card { min-width: 300px; background: var(--white); color: var(--black); padding: 2rem; border-radius: 15px; }
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
         @media (min-width: 768px) {
-            h1 { font-size: 5rem; }
-            nav { padding: 1.5rem 10%; }
+            .contact-form { grid-template-columns: 1fr 1fr; }
+            * { cursor: none; } /* يرجع المؤشر المخفي للكمبيوتر فقط */
         }
     </style>
 </head>
 <body>
 
+    <div id="loader">NOVA DESIGN</div>
+    <div id="design-robot">🤖</div>
+    <div class="cursor"></div>
+
     <nav>
-        <div style="font-size: 1.5rem; font-weight: 900;">NOVA.</div>
+        <div style="font-size: 2rem; font-weight: 900;">NOVA.</div>
         <div class="nav-links">
             <a href="https://www.facebook.com/share/1G1yNLefUV/" target="_blank" class="fb-link">Facebook</a>
-            <button onclick="document.body.classList.toggle('dark')" style="padding: 8px 15px; border-radius: 20px; cursor: pointer;">Mode</button>
+            <button class="btn-submit" onclick="document.body.classList.toggle('dark')" style="padding: 10px 20px; width: auto;">Mode</button>
         </div>
     </nav>
 
     <section class="hero">
         <h1 id="hero-title">WE DESIGN BRANDS.</h1>
+        <p style="font-size: 1.5rem;">Professional Agency based in Cairo, Egypt.</p>
+    </section>
+
+    <section id="services">
+        <h2 style="padding: 0 10%; margin-bottom: 2rem;">Our Services</h2>
+        <div class="services-grid">
+            <button class="service-card" onclick="scrollToPricing('Identity Design')"><h3>Identity Design</h3><p>Logo & Brand Guidelines.</p></button>
+            <button class="service-card" onclick="scrollToPricing('Web Design')"><h3>Web Design</h3><p>UI/UX for Web & Apps.</p></button>
+            <button class="service-card" onclick="scrollToPricing('Packaging')"><h3>Packaging</h3><p>Retail & Product Solutions.</p></button>
+            <button class="service-card" onclick="scrollToPricing('Art Direction')"><h3>Art Direction</h3><p>Visual Strategy & Creative.</p></button>
+        </div>
     </section>
 
     <section id="pricing-section">
+        <h2 id="pricing-title">Start your project</h2>
         <form id="contactForm" class="contact-form">
-            <label>Select your package:</label>
-            <select name="Package">
-                <option value="Basic">Basic Package</option>
-                <option value="Standard">Standard Package</option>
-                <option value="Premium">Premium Package</option>
-            </select>
-            
-            <input type="hidden" name="Service" value="Inquiry">
+            <div style="grid-column: 1 / -1;">
+                <label>Select your package:</label>
+                <select name="Package" style="margin-top:10px;">
+                    <option value="Basic">Basic Package</option>
+                    <option value="Standard">Standard Package</option>
+                    <option value="Premium">Premium Package</option>
+                </select>
+            </div>
+            <input type="hidden" name="Service" id="hidden-service-field">
             <input type="text" name="Name" placeholder="Full Name" required>
             <input type="tel" name="WhatsApp" placeholder="WhatsApp Number" required>
-            <textarea name="Details" placeholder="Project Details" rows="4"></textarea>
-            <button type="submit" class="btn-submit">Send Message</button>
+            <textarea name="Details" placeholder="Project Details" rows="4" style="grid-column: 1 / -1;"></textarea>
+            <button type="submit" class="btn-submit" style="grid-column: 1 / -1;">Send Message</button>
         </form>
     </section>
 
     <script>
+        // تفعيل الحركات للكمبيوتر فقط
+        if (window.innerWidth > 768) {
+            window.addEventListener('load', () => gsap.to('#loader', { y: '-100%', duration: 1.5 }));
+            document.addEventListener('mousemove', (e) => gsap.to('.cursor', { x: e.clientX - 10, y: e.clientY - 10, duration: 0.1 }));
+            gsap.to("#design-robot", { x: "random(-400, 400)", y: "random(-300, 300)", duration: 3, repeat: -1, yoyo: true, rotation: "random(-45, 45)" });
+        } else {
+            document.getElementById('loader').style.display = 'none'; // إخفاء اللودر في الموبايل
+            document.getElementById('design-robot').style.display = 'none';
+            document.querySelector('.cursor').style.display = 'none';
+        }
+
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwX_1HcHKAHJunEDOiseXSoMoweef0jqNpSU_e8SFfq21AMUMQyioIl6HeJIg5MUBPFbw/exec";
 
         document.getElementById('contactForm').addEventListener('submit', function(e) {
@@ -74,9 +111,15 @@
             const btn = this.querySelector('button');
             btn.innerText = "Sending...";
             fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: new FormData(this) })
-            .then(() => { alert('تم الإرسال بنجاح!'); this.reset(); btn.innerText = "Send Message"; })
+            .then(() => { alert('تم استلام طلبك بنجاح!'); this.reset(); btn.innerText = "Send Message"; })
             .catch(() => { alert('تم الإرسال!'); this.reset(); btn.innerText = "Send Message"; });
         });
+
+        function scrollToPricing(service) {
+            document.getElementById('pricing-title').innerText = "Start: " + service;
+            document.getElementById('hidden-service-field').value = service;
+            gsap.to(window, { duration: 1, scrollTo: { y: "#pricing-section", offsetY: 50 }, ease: "power4.inOut" });
+        }
     </script>
 </body>
 </html>
